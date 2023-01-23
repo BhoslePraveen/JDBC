@@ -61,3 +61,65 @@ Different ways of creating object
 3. searialization
 4. new instance
 5. class.forname
+===================================================
+Update query
+Class.forName("com.mysql.cj.jdbc.Driver);
+Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/user", "root", "root");
+PreparedStatement ps = con.prepareStatement("update employee set username =?, password =? where id =?");
+ps.setString(1, "ashok");
+ps.setString(2, "12345");
+ps.setInt(3, 2);
+int i = ps.executeUpdate();
+System.out.println("Record updated ....."+i);
+//Release the resources
+ps.close();
+con.close();
+===================================================
+Delete Query
+//Step1 : Load the driver class
+Class.forName("com.mysql.cj.jdbc.Driver");
+//Step2 : Establish the connection
+Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/user","root","root");
+//Step3 : Create the prepared statment.
+PreparedStatement ps = con.prepareStatement("delete from employee where id =?");
+ps.setInt(1, 2);
+int i = ps.executeUpdate();
+System.out.println("Record deleted ...."+i);
+//close the resources 
+ps.close();
+con.close();
+===================================================
+Retrival Query
+//Step1 : Load the driver class
+Class.forName("com.mysql.cj.jdbc.Driver");
+//Step2 : Establish the connection.
+Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/user","root","root");
+//Step3 : Craete the prepared statment.
+PreparedStatement ps = con.prepareStatement("select * from employee");
+ResultSet rs = ps.executeQuery();
+while(rs.next()) {
+System.out.println("ID:"+rs.getInt(1));
+System.out.println("Username:"+rs.getString(2));
+System.out.println("Password :"+rs.getString(3));
+}
+//close the resources
+con.close();
+ps.close();
+rs.close();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
